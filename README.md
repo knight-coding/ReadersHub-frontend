@@ -1,7 +1,9 @@
 # 📚 ReadersHub
 A full-stack MERN web application that allows users to explore books, write reviews, and rate their favorite reads.  
 
-[GitHub Repository](https://github.com/knight-coding/ReadersHub-frontend.git)
+- [Frontend Repository](https://github.com/knight-coding/ReadersHub-frontend)
+- [Backend Repository](https://github.com/knight-coding/ReadersHub-backend)
+
 
 ---
 
@@ -61,11 +63,18 @@ Make sure you have the following installed:
 
 ### 🔧 Installation
 
-1. **Clone the repository**
+1. **Clone the repositories**
+
    ```bash
-   git clone https://github.com/knight-coding/ReadersHub-frontend.git
-   cd ReadersHub
-    ````
+   # Create a project folder
+   mkdir ReadersHub && cd ReadersHub
+
+   # Clone frontend
+   git clone https://github.com/knight-coding/ReadersHub-frontend.git frontend
+
+   # Clone backend
+   git clone https://github.com/knight-coding/ReadersHub-backend.git backend
+    ```
 
 2. **Install dependencies**
 
