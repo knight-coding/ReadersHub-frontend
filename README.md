@@ -116,3 +116,12 @@ Make sure you have the following installed:
      cd frontend
      npm run dev
      ```
+## 📡 API Endpoints
+- `POST /api/auth/register` → Register new user
+- `POST /api/auth/login` → User login
+- `GET /api/books` → Get all books
+- `POST /api/reviews/:bookId` → Add review for a book
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome!  
+Feel free to fork the repo and submit a PR.
