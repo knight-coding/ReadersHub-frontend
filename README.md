@@ -63,9 +63,9 @@ Make sure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/knight-coding/ReadersHub.git
+   git clone https://github.com/knight-coding/ReadersHub-frontend.git
    cd ReadersHub
-````
+    ````
 
 2. **Install dependencies**
 
@@ -107,17 +107,3 @@ Make sure you have the following installed:
      cd frontend
      npm run dev
      ```
-
----
-
-## 🌐 Access
-
-* **Frontend:** `http://localhost:3000`
-* **Backend API:** `http://localhost:5000/api`
-
-```
-
----
-
-👉 Do you want me to also add a **Table of Contents with hyperlinks** at the very top (so readers can quickly jump to Features, Tech Stack, Getting Started, etc.)? That makes long READMEs much easier to navigate.
-```
