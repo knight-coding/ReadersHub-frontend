@@ -72,47 +72,76 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden mt-3 space-y-3 px-4 pb-4">
-            <NavLink to="/home" onClick={() => setMenuOpen(false)}>
+          <div className="lg:hidden mt-3 px-4 pb-4 space-y-3">
+            <NavLink
+              to="/home"
+              onClick={() => setMenuOpen(false)}
+              className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
               Home
             </NavLink>
-            <NavLink to="/explore" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/explore"
+              onClick={() => setMenuOpen(false)}
+              className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
               Explore
             </NavLink>
-            <NavLink to="/store" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/store"
+              onClick={() => setMenuOpen(false)}
+              className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
               Store
             </NavLink>
             {Array.isArray(role) &&
               (role.includes("Admin") || role.includes("Editor")) && (
-                <NavLink to="/addBook" onClick={() => setMenuOpen(false)}>
+                <NavLink
+                  to="/addBook"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+                >
                   AddBook
                 </NavLink>
               )}
-            <NavLink to="/about" onClick={() => setMenuOpen(false)}>
+            <NavLink
+              to="/about"
+              onClick={() => setMenuOpen(false)}
+              className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+            >
               About
             </NavLink>
 
             {/* Auth Buttons in Mobile */}
             {!loggedIn ? (
-              <div className="flex flex-col space-y-2">
-                <Link to="/login" onClick={() => setMenuOpen(false)}>
+              <div className="flex flex-col space-y-2 mt-4">
+                <Link
+                  to="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-4 py-2 rounded-lg hover:bg-gray-100"
+                >
                   Log in
                 </Link>
                 <Link
                   to="/signin"
                   onClick={() => setMenuOpen(false)}
-                  className="bg-blue-800 text-white rounded-lg px-4 py-2"
+                  className="block px-4 py-2 bg-blue-800 text-white rounded-lg text-center"
                 >
                   Get started
                 </Link>
               </div>
             ) : (
-              <Link to="/account" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/account"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center px-4 py-2"
+              >
                 <img
                   src="https://static.vecteezy.com/system/resources/previews/021/079/672/original/user-account-icon-for-your-design-only-free-png.png"
-                  className="rounded-2xl w-14"
+                  className="rounded-2xl w-10"
                   alt="User"
                 />
+                <span className="ml-2">Account</span>
               </Link>
             )}
           </div>

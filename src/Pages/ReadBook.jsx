@@ -69,7 +69,7 @@ export default function ReadBook() {
         return;
       }
       try {
-        const res = await fetch(`http://localhost:4000/store/${bookId}`);
+        const res = await fetch(`${API}/store/${bookId}`);
         const data = await res.json();
         setAuthor(data.author);
         setDescription(data.description);
