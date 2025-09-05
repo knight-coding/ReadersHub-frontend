@@ -91,7 +91,7 @@ export default function ReadBook() {
       {/* Header */}
       <header className="bg-[#f3e9dd] border-b border-gray-300 flex items-center px-4 py-3 shadow-sm sticky top-0 z-10">
         <img
-          src="https://icon-library.com/images/back-arrow-icon-png/back-arrow-icon-png-20.jpg"
+          src="https://img.icons8.com/?size=100&id=99284&format=png&color=000000"
           alt="back"
           className="w-8 cursor-pointer hover:scale-110 transition-transform"
           onClick={() => navigate("/explore")}

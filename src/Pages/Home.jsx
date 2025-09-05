@@ -81,12 +81,13 @@ function Home() {
                 "Finance",
                 "History",
               ].map((category, index) => (
-                <div
+                <Link
                   key={index}
+                  to={`/explore?category=${encodeURIComponent(category)}`}
                   className="bg-[#fdf6ec] text-[#5C4033] rounded-xl shadow p-6 text-center hover:bg-[#f1e6d6] cursor-pointer transition"
                 >
                   <h4 className="text-lg font-medium">{category}</h4>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
