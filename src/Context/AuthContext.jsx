@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import conf from "../conf/conf"
 
 export const AuthContext = createContext();
 
@@ -7,13 +8,14 @@ export function AuthProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [role, setRole] = useState([]);
+  const API = conf.backendUrl
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
 
     axios
-      .get("http://localhost:4000/auth/verify", {
+      .get(`${API}/auth/verify`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -36,7 +38,7 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/logout`, {
+      const res = await fetch(`${API}/logout`, {
         method: 'POST',
         credentials: 'include',
       });
