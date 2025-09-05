@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
+import conf from '../conf/conf';
 
 const LoginPage = () => {
   const Navigate = useNavigate();
@@ -12,6 +13,7 @@ const LoginPage = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const {setLoggedIn, setUser, setRole  } = useContext(AuthContext);
+  const API = conf.backendUrl
 
   const validateLogin = (e) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ const LoginPage = () => {
     }
 
     if (isValid) {
-      axios.post("http://localhost:4000/auth", { email, password })
+      axios.post(`${API}/auth`, { email, password })
         .then(res => {
           // console.log("Login successful", res.data);
           // Save token in localStorage

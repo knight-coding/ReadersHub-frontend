@@ -1,17 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const { loggedIn, role } = useContext(AuthContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  
   useEffect(() => {
 
-  }, [role, loggedIn])
+  }, [role])
 
   return (
-    <header className="shadow z-50 top-0">
-      <nav className="bg-[#fffaf2] border-gray-200 px-4 lg:px-6 py-2.5">
+    <header className="shadow z-50 fixed top-0 left-0 w-full bg-[#fffaf2]">
+      <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
               src="https://cdn-icons-png.flaticon.com/512/4212/4212474.png"
@@ -20,107 +24,99 @@ export default function Header() {
             />
           </Link>
 
-          {!loggedIn ? (
-            <div className="flex items-center lg:order-2">
-              <Link
-                to="/login"
-                className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-400 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-              >
-                Log in
-              </Link>
-              <Link
-                to="/signin"
-                className="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-              >
-                Get started
-              </Link>
-            </div>
-          ) : (
-            <div className="flex items-center lg:order-2">
-              <Link to="/account" className="flex items-center">
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/explore">Explore</NavLink>
+            <NavLink to="/store">Store</NavLink>
+            {Array.isArray(role) &&
+              (role.includes("Admin") || role.includes("Editor")) && (
+                <NavLink to="/addBook">AddBook</NavLink>
+              )}
+            <NavLink to="/about">About</NavLink>
+          </div>
+
+          {/* Desktop Auth Buttons */}
+          <div className="hidden lg:flex lg:items-center">
+            {!loggedIn ? (
+              <>
+                <Link to="/login" className="px-4 py-2">
+                  Log in
+                </Link>
+                <Link
+                  to="/signin"
+                  className="px-4 py-2 bg-blue-800 text-white rounded-lg"
+                >
+                  Get started
+                </Link>
+              </>
+            ) : (
+              <Link to="/account">
                 <img
                   src="https://static.vecteezy.com/system/resources/previews/021/079/672/original/user-account-icon-for-your-design-only-free-png.png"
                   alt="User"
                   className="rounded-2xl w-14"
                 />
               </Link>
-            </div>
-          )}
-
-          <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-            id="mobile-menu-2"
-          >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <NavLink
-                  to="/home"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
-                      isActive ? "text-blue-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-cyan-700 lg:p-0`
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/explore"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
-                      isActive ? "text-blue-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-cyan-700 lg:p-0`
-                  }
-                >
-                  Explore
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/store"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
-                      isActive ? "text-blue-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-cyan-700 lg:p-0`
-                  }
-                >
-                  Store
-                </NavLink>
-              </li>
-
-              {(Array.isArray(role) && (role.includes("Admin") || role.includes("Editor"))) && (
-                <li>
-                  <NavLink
-                    to="/addBook"
-                    className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 duration-200 ${
-                        isActive ? "text-blue-700" : "text-gray-700"
-                      } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-cyan-700 lg:p-0`
-                    }
-                  >
-                    AddBook
-                  </NavLink>
-                </li>
-              )}
-
-              <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
-                      isActive ? "text-blue-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-cyan-700 lg:p-0`
-                  }
-                >
-                  About
-                </NavLink>
-              </li>
-            </ul>
+            )}
           </div>
+
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="inline-flex items-center p-2 text-gray-500 rounded-lg lg:hidden"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="lg:hidden mt-3 space-y-3 px-4 pb-4">
+            <NavLink to="/home" onClick={() => setMenuOpen(false)}>
+              Home
+            </NavLink>
+            <NavLink to="/explore" onClick={() => setMenuOpen(false)}>
+              Explore
+            </NavLink>
+            <NavLink to="/store" onClick={() => setMenuOpen(false)}>
+              Store
+            </NavLink>
+            {Array.isArray(role) &&
+              (role.includes("Admin") || role.includes("Editor")) && (
+                <NavLink to="/addBook" onClick={() => setMenuOpen(false)}>
+                  AddBook
+                </NavLink>
+              )}
+            <NavLink to="/about" onClick={() => setMenuOpen(false)}>
+              About
+            </NavLink>
+
+            {/* Auth Buttons in Mobile */}
+            {!loggedIn ? (
+              <div className="flex flex-col space-y-2">
+                <Link to="/login" onClick={() => setMenuOpen(false)}>
+                  Log in
+                </Link>
+                <Link
+                  to="/signin"
+                  onClick={() => setMenuOpen(false)}
+                  className="bg-blue-800 text-white rounded-lg px-4 py-2"
+                >
+                  Get started
+                </Link>
+              </div>
+            ) : (
+              <Link to="/account" onClick={() => setMenuOpen(false)}>
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/021/079/672/original/user-account-icon-for-your-design-only-free-png.png"
+                  className="rounded-2xl w-14"
+                  alt="User"
+                />
+              </Link>
+            )}
+          </div>
+        )}
       </nav>
     </header>
   );

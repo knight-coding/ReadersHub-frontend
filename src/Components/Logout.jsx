@@ -1,14 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
+import conf from '../conf/conf';
 
 export default function Account() {
   const { setLoggedIn, setUser, setRole } = useContext(AuthContext);
   const navigate = useNavigate();
+  const API = conf.backendUrl
 
   const logout = async () => {
     try {
-      const res = await fetch(`http://localhost:4000/logout`, {
+      const res = await fetch(`${API}/logout`, {
         method: 'POST',
         credentials: 'include',
       });

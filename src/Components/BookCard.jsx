@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
+import conf from '../conf/conf';
 
 function BookCard({ id, image, title, btnTitle, source }) {
   const [wishlist, setWishlist] = useState(false);
   const {role} = useContext(AuthContext);
+  const API = conf.backendUrl
 
   const handleWishlist = async  () => {
     try {
-      const res = await fetch(`http://localhost:4000/books/wishlist/toggle/${id}`, {
+      const res = await fetch(`${API}/books/wishlist/toggle/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +39,7 @@ function BookCard({ id, image, title, btnTitle, source }) {
 
   const handleDelete = async  () => {
     try {
-      const res = await fetch(`http://localhost:4000/books/remove/${id}`, {
+      const res = await fetch(`${API}/books/remove/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +61,7 @@ function BookCard({ id, image, title, btnTitle, source }) {
   useEffect(() => {
     const checkWishlist = async () => {
       try {
-        const res = await fetch(`http://localhost:4000/books/wishlist/${id}`, {
+        const res = await fetch(`${API}/books/wishlist/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -101,7 +103,7 @@ function BookCard({ id, image, title, btnTitle, source }) {
         >
           {!wishlist ? (
             <img
-              src="https://icon-library.com/images/wishlist-icon/wishlist-icon-19.jpg"
+              src="https://img.icons8.com/?size=100&id=16076&format=png&color=000000"
               alt="Add to wishlist"
               className="w-4 sm:w-5 md:w-6 lg:w-7 h-5 sm:h-6 md:h-7 lg:h-8"
             />

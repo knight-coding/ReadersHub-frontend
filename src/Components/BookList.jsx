@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BookCard from './BookCard.jsx';
+import conf from '../conf/conf.js';
 
 function BookList({ category, books: booksProp, btnTitle, title }) {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const API = conf.backendUrl  
 
   useEffect(() => {
     // console.log('useEffect triggered for category:', category);
@@ -15,7 +16,7 @@ function BookList({ category, books: booksProp, btnTitle, title }) {
     } else if (category) {
       setLoading(true);
       // console.log(`Fetching books for category: ${category}`);
-        axios.get(`http://localhost:4000/store/category/${encodeURIComponent(category)}`)
+        axios.get(`${API}/store/category/${encodeURIComponent(category)}`)
         .then(res => {
           setBooks(res.data.books || []);
         })

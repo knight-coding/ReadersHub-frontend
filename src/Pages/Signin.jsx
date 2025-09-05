@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import conf from '../conf/conf';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const API = conf.backendUrl
 
   const [formData, setFormData] = useState({
     username: '',
@@ -50,7 +52,7 @@ const Signup = () => {
 
     try {
       // Send data to your backend
-      await axios.post('http://localhost:4000/register', {
+      await axios.post(`${API}/register`, {
         username,
         email,
         password,

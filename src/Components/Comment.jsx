@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import conf from "../conf/conf";
 
 function Comment({ bookId, refresh }) {   // destructured from props
   const { user } = useContext(AuthContext);   // ✅ inside component
   const loggedInUserId = user?.id;
+  const API = conf.backendUrl
 
   const [comments, setComments] = useState([]);
 
@@ -19,7 +21,7 @@ function Comment({ bookId, refresh }) {   // destructured from props
         return;
       }
       try {
-        const res = await axios.get(`http://localhost:4000/store/getReviews/${bookId}`);
+        const res = await axios.get(`${API}/store/getReviews/${bookId}`);
         setComments(res.data);
       } catch (error) {
         console.log("Error in fetching comments:", error.response?.data || error.message);
@@ -32,7 +34,7 @@ function Comment({ bookId, refresh }) {   // destructured from props
   const handleDelete = async (reviewId) => {
     try {
       const token = localStorage.getItem("accessToken");
-      await axios.delete(`http://localhost:4000/book/review/remove/${reviewId}`, {
+      await axios.delete(`${API}/book/review/remove/${reviewId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Remove deleted comment from state

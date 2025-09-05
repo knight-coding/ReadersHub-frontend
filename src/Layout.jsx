@@ -8,7 +8,9 @@ function Layout(){
     return(
         <>
         <Header />
-        <Outlet />
+        <main className="pt-16">
+            <Outlet />
+        </main>
         <Footer />
         </>
     )

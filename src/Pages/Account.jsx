@@ -3,11 +3,13 @@ import BookCard from '../Components/BookCard'
 import { AuthContext } from '../Context/AuthContext';
 import Logout from '../Components/Logout'
 import { useNavigate } from 'react-router-dom';
+import conf from '../conf/conf';
 
 function Account() {
   const [booksId, setBooksId] = useState([]);
   const { logout, user, loggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const API = conf.backendUrl;
 
   useEffect(() => {
     if (!loggedIn) {
@@ -19,7 +21,7 @@ function Account() {
       if (!user) return;
       const getWishlist = async () => {
         try {
-          const res = await fetch(`http://localhost:4000/books/wishlist/mywishlist`, {
+          const res = await fetch(`${API}/books/wishlist/mywishlist`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

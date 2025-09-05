@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import BookList from '../Components/BookList';
+import conf from '../conf/conf';
 
 function Explore() {
     const [books, setBooks] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredBooks, setFilteredBooks] = useState([]);
+    const API = conf.backendUrl
 
     useEffect(() => {
-        fetch('http://localhost:4000/store/all')
+        fetch(`${API}/store/all`)
             .then(res => res.json())
             .then(data => {
                 setBooks(data);

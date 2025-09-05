@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import conf from '../conf/conf';
 
 function AddBook() {
   const Navigate = useNavigate();
@@ -13,6 +14,7 @@ function AddBook() {
   });
 
   const [message, setMessage] = useState('');
+  const API = conf.backendUrl
 
   // Predefined categories
   const categories = [
@@ -67,7 +69,7 @@ function AddBook() {
     };
 
     try {
-      const res = await fetch('http://localhost:4000/books/add', {
+      const res = await fetch(`${API}/books/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
