@@ -1,17 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import { Menu, X } from "lucide-react";
 
 export default function Header() {
-  const { loggedIn, role } = useContext(AuthContext);
+  const { loggedIn, role, loading } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {}, [role]);
+  if (loading) {
+    // While checking token → don’t show login button flash
+    return (
+      <header className="shadow z-50 fixed top-0 left-0 w-full bg-[#fffaf2]">
+        <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
+          <div className="flex justify-between items-center mx-auto max-w-screen-xl">
+            <Link to="/" className="flex items-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/4212/4212474.png"
+                className="mr-3 w-14 rounded-3xl"
+                alt="Logo"
+              />
+            </Link>
+          </div>
+        </nav>
+      </header>
+    );
+  }
 
   return (
     <header className="shadow z-50 fixed top-0 left-0 w-full bg-[#fffaf2]">
-      <nav className="border-gray-200 px-4 md:px-6 py-2.5">
+      <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           {/* Logo */}
           <Link to="/" className="flex items-center">
