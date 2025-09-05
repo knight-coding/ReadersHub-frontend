@@ -6,14 +6,12 @@ import { Menu, X } from "lucide-react";
 export default function Header() {
   const { loggedIn, role } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  
-  useEffect(() => {
 
-  }, [role])
+  useEffect(() => {}, [role]);
 
   return (
     <header className="shadow z-50 fixed top-0 left-0 w-full bg-[#fffaf2]">
-      <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
+      <nav className="border-gray-200 px-4 md:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -25,7 +23,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+          <div className="hidden md:flex md:items-center md:space-x-8">
             <NavLink to="/home">Home</NavLink>
             <NavLink to="/explore">Explore</NavLink>
             <NavLink to="/store">Store</NavLink>
@@ -37,7 +35,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Auth Buttons */}
-          <div className="hidden lg:flex lg:items-center">
+          <div className="hidden md:flex md:items-center">
             {!loggedIn ? (
               <>
                 <Link to="/login" className="px-4 py-2">
@@ -64,7 +62,7 @@ export default function Header() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="inline-flex items-center p-2 text-gray-500 rounded-lg lg:hidden"
+            className="inline-flex items-center p-2 text-gray-500 rounded-lg md:hidden"
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -72,7 +70,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden mt-3 px-4 pb-4 space-y-3">
+          <div className="md:hidden mt-3 px-4 pb-4 space-y-3">
             <NavLink
               to="/home"
               onClick={() => setMenuOpen(false)}
