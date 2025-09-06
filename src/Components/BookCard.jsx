@@ -8,7 +8,7 @@ import conf from '../conf/conf';
 
 function BookCard({ id, image, title, btnTitle, source }) {
   const [wishlist, setWishlist] = useState(false);
-  const {role} = useContext(AuthContext);
+  const {role, loggedIn} = useContext(AuthContext);
   const API = conf.backendUrl
 
   const handleWishlist = async  () => {
@@ -68,7 +68,7 @@ function BookCard({ id, image, title, btnTitle, source }) {
             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
           },
         });
-
+        
         if (res.ok) {
           const data = await res.json();
           setWishlist(data.isInWishlist === true);
@@ -79,7 +79,8 @@ function BookCard({ id, image, title, btnTitle, source }) {
         console.error('Network error in isInWishlist call:', error);
       }
     };
-
+    
+    if(!loggedIn) return ;
     checkWishlist();
   }, [id]);  // add id as dependency if it changes
 
